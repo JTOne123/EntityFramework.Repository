@@ -6,20 +6,18 @@ using System.Linq.Expressions;
 
 namespace DevOvercome.EntityFramework.Repository.Internals.Parameters
 {
-	public class FetchParameters<TModel> : QueryParameters<TModel>
+	internal class FetchParameters<TModel> : QueryParameters<TModel>
 		where TModel : class
 	{
 		/// <summary>
-		/// Будет ли включён выгружаемый обьект в контекст. 
-		/// Например, нет смысла отслеживать вьюшки и вытяжку данных для таблиц
-		/// Default = true
+		/// Determines is loaded object excluded from context
+		/// i.e. no point to load multiple records if they just for display.
+		/// Default = true, for Fetch(), and False, for FetchOne
 		/// </summary>
 		public bool NoTracking { get; protected set; }
 
 		internal List<Expression<Func<TModel, bool>>> FilteringRules { get; private set; }
-		/// <summary>
-		/// По умолчанию - первая страница, 1 элемент
-		/// </summary>
+		
 		internal PagingRule PagingRule { get; private set; }
 		internal List<SortingRule> SortingRules { get; private set; }
 

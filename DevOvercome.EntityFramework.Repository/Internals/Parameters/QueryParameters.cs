@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace DevOvercome.EntityFramework.Repository.Internals.Parameters
 {
-	public class QueryParameters<TModel>
+	internal class QueryParameters<TModel>
 		where TModel : class
 	{
 		private readonly List<LambdaExpression> lambdaExpressions = new List<LambdaExpression>();

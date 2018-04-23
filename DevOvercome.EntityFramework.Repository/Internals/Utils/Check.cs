@@ -3,7 +3,7 @@ using System;
 namespace DevOvercome.EntityFramework.Repository.Internals.Utils
 {
 	// from EF source code
-	public class Check
+	internal class Check
 	{
 		public static T NotNull<T>(T value, string parameterName) where T : class
 		{

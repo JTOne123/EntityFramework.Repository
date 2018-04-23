@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DevOvercome.EntityFramework.Repository.Internals.Utils
 {
 	// from EF source code
-	public class DebugCheck
+	internal class DebugCheck
 	{
 		[Conditional("DEBUG")]
 		public static void NotNull<T>(T value) where T : class
