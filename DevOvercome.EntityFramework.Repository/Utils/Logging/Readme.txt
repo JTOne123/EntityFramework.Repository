@@ -1,0 +1,1 @@
+﻿Exception prettifier. Probably it doesnt belong here
