@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Common.DatabaseFirs
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Samples.Common.SQL", "src\Samples\Samples.Common\Samples.Common.SQL\Samples.Common.SQL.sqlproj", "{B197ADDD-71B2-4A14-8FDA-B42C522AC53F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Common.CodeFirst", "src\Samples\Samples.Common\Samples.Common.CodeFirst\Samples.Common.CodeFirst.csproj", "{4B7644D4-D185-47B2-9CF1-9C5814B3D160}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{B197ADDD-71B2-4A14-8FDA-B42C522AC53F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B197ADDD-71B2-4A14-8FDA-B42C522AC53F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B197ADDD-71B2-4A14-8FDA-B42C522AC53F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4B7644D4-D185-47B2-9CF1-9C5814B3D160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B7644D4-D185-47B2-9CF1-9C5814B3D160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B7644D4-D185-47B2-9CF1-9C5814B3D160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B7644D4-D185-47B2-9CF1-9C5814B3D160}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{3462399F-AD29-4EB9-8C31-D2C83C5ADA23} = {7108346A-49F5-4A6C-9BD9-4320240AF641}
 		{E6C9AF2F-A087-4FE9-8FAE-102DEF69CA2A} = {3462399F-AD29-4EB9-8C31-D2C83C5ADA23}
 		{B197ADDD-71B2-4A14-8FDA-B42C522AC53F} = {3462399F-AD29-4EB9-8C31-D2C83C5ADA23}
+		{4B7644D4-D185-47B2-9CF1-9C5814B3D160} = {3462399F-AD29-4EB9-8C31-D2C83C5ADA23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC689AFF-FB8B-4670-ABBA-D3B6A4510445}
