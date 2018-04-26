@@ -49,69 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ban.cs">
-      <DependentUpon>BlogsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BlogsModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BlogsModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BlogsModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BlogsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BlogsModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BlogsModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Hashtag.cs">
-      <DependentUpon>BlogsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Moderator.cs">
-      <DependentUpon>BlogsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Post.cs">
-      <DependentUpon>BlogsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PostCategory.cs">
-      <DependentUpon>BlogsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Posts_hashtags.cs">
-      <DependentUpon>BlogsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs">
-      <DependentUpon>BlogsModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="BlogsModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BlogsModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="BlogsModel.edmx.diagram">
-      <DependentUpon>BlogsModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="BlogsModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BlogsModel.edmx</DependentUpon>
-      <LastGenOutput>BlogsModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="BlogsModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BlogsModel.edmx</DependentUpon>
-      <LastGenOutput>BlogsModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
