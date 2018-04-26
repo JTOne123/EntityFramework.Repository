@@ -3,7 +3,7 @@ using DevOvercome.EntityFramework.Repository.Internals;
 using System;
 using System.Data.Entity;
 
-namespace EntityFramework.Repository
+namespace DevOvercome.EntityFramework.Repository
 {
 	/// <summary>
 	/// since implementations are internal, just in case if your IoC cant locate internals.

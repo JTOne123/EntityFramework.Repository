@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>DevOvercome.EntityFramework.Repository</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
