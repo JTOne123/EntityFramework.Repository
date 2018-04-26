@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BlogsContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ModeratorId" Type="int" />
+          <Property Name="DateBanned" Type="datetime" Nullable="false" />
+          <Property Name="DaysBanned" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hashtags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Moderators">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TargetCategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="PostCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Post" Type="text" Nullable="false" />
+          <Property Name="DatePosted" Type="datetime" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="DayPosted" Type="date" StoreGeneratedPattern="Computed" />
+          <Property Name="Topic" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="AutorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posts_hashtags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="HashtagId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DateRegistered" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Bans__ModeratorI__22AA2996">
+          <End Role="Moderators" Type="Self.Moderators" Multiplicity="0..1" />
+          <End Role="Bans" Type="Self.Bans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moderators">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bans">
+              <PropertyRef Name="ModeratorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bans__UserId__21B6055D">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Bans" Type="Self.Bans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bans">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moderator__Targe__24927208">
+          <End Role="PostCategories" Type="Self.PostCategories" Multiplicity="0..1" />
+          <End Role="Moderators" Type="Self.Moderators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Moderators">
+              <PropertyRef Name="TargetCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moderators__Id__239E4DCF">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Moderators" Type="Self.Moderators" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Moderators">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts__AutorId__267ABA7A">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="AutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts__CategoryI__25869641">
+          <End Role="PostCategories" Type="Self.PostCategories" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts_has__Hasht__286302EC">
+          <End Role="Hashtags" Type="Self.Hashtags" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Posts_hashtags" Type="Self.Posts_hashtags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hashtags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts_hashtags">
+              <PropertyRef Name="HashtagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts_has__PostI__276EDEB3">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Posts_hashtags" Type="Self.Posts_hashtags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts_hashtags">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BlogsContextStoreContainer">
+          <EntitySet Name="Bans" EntityType="Self.Bans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hashtags" EntityType="Self.Hashtags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Moderators" EntityType="Self.Moderators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostCategories" EntityType="Self.PostCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts_hashtags" EntityType="Self.Posts_hashtags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Bans__ModeratorI__22AA2996" Association="Self.FK__Bans__ModeratorI__22AA2996">
+            <End Role="Moderators" EntitySet="Moderators" />
+            <End Role="Bans" EntitySet="Bans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bans__UserId__21B6055D" Association="Self.FK__Bans__UserId__21B6055D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Bans" EntitySet="Bans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moderator__Targe__24927208" Association="Self.FK__Moderator__Targe__24927208">
+            <End Role="PostCategories" EntitySet="PostCategories" />
+            <End Role="Moderators" EntitySet="Moderators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moderators__Id__239E4DCF" Association="Self.FK__Moderators__Id__239E4DCF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Moderators" EntitySet="Moderators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts__AutorId__267ABA7A" Association="Self.FK__Posts__AutorId__267ABA7A">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts__CategoryI__25869641" Association="Self.FK__Posts__CategoryI__25869641">
+            <End Role="PostCategories" EntitySet="PostCategories" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts_has__Hasht__286302EC" Association="Self.FK__Posts_has__Hasht__286302EC">
+            <End Role="Hashtags" EntitySet="Hashtags" />
+            <End Role="Posts_hashtags" EntitySet="Posts_hashtags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts_has__PostI__276EDEB3" Association="Self.FK__Posts_has__PostI__276EDEB3">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Posts_hashtags" EntitySet="Posts_hashtags" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BlogsContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ban">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ModeratorId" Type="Int32" />
+          <Property Name="DateBanned" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DaysBanned" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Moderator" Relationship="Self.FK__Bans__ModeratorI__22AA2996" FromRole="Bans" ToRole="Moderators" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Bans__UserId__21B6055D" FromRole="Bans" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Hashtag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Posts_hashtags" Relationship="Self.FK__Posts_has__Hasht__286302EC" FromRole="Hashtags" ToRole="Posts_hashtags" />
+        </EntityType>
+        <EntityType Name="Moderator">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TargetCategoryId" Type="Int32" />
+          <NavigationProperty Name="Bans" Relationship="Self.FK__Bans__ModeratorI__22AA2996" FromRole="Moderators" ToRole="Bans" />
+          <NavigationProperty Name="PostCategory" Relationship="Self.FK__Moderator__Targe__24927208" FromRole="Moderators" ToRole="PostCategories" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Moderators__Id__239E4DCF" FromRole="Moderators" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="PostCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Moderators" Relationship="Self.FK__Moderator__Targe__24927208" FromRole="PostCategories" ToRole="Moderators" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK__Posts__CategoryI__25869641" FromRole="PostCategories" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Post1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DatePosted" Type="DateTime" Precision="3" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="DayPosted" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
+          <Property Name="Topic" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AutorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PostCategory" Relationship="Self.FK__Posts__CategoryI__25869641" FromRole="Posts" ToRole="PostCategories" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Posts__AutorId__267ABA7A" FromRole="Posts" ToRole="Users" />
+          <NavigationProperty Name="Posts_hashtags" Relationship="Self.FK__Posts_has__PostI__276EDEB3" FromRole="Posts" ToRole="Posts_hashtags" />
+        </EntityType>
+        <EntityType Name="Posts_hashtags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="HashtagId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hashtag" Relationship="Self.FK__Posts_has__Hasht__286302EC" FromRole="Posts_hashtags" ToRole="Hashtags" />
+          <NavigationProperty Name="Post" Relationship="Self.FK__Posts_has__PostI__276EDEB3" FromRole="Posts_hashtags" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateRegistered" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Bans" Relationship="Self.FK__Bans__UserId__21B6055D" FromRole="Users" ToRole="Bans" />
+          <NavigationProperty Name="Moderator" Relationship="Self.FK__Moderators__Id__239E4DCF" FromRole="Users" ToRole="Moderators" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK__Posts__AutorId__267ABA7A" FromRole="Users" ToRole="Posts" />
+        </EntityType>
+        <Association Name="FK__Bans__ModeratorI__22AA2996">
+          <End Role="Moderators" Type="Self.Moderator" Multiplicity="0..1" />
+          <End Role="Bans" Type="Self.Ban" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moderators">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bans">
+              <PropertyRef Name="ModeratorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bans__UserId__21B6055D">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Bans" Type="Self.Ban" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bans">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts_has__Hasht__286302EC">
+          <End Role="Hashtags" Type="Self.Hashtag" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Posts_hashtags" Type="Self.Posts_hashtags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hashtags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts_hashtags">
+              <PropertyRef Name="HashtagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moderator__Targe__24927208">
+          <End Role="PostCategories" Type="Self.PostCategory" Multiplicity="0..1" />
+          <End Role="Moderators" Type="Self.Moderator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Moderators">
+              <PropertyRef Name="TargetCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moderators__Id__239E4DCF">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Moderators" Type="Self.Moderator" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Moderators">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts__CategoryI__25869641">
+          <End Role="PostCategories" Type="Self.PostCategory" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts__AutorId__267ABA7A">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="AutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts_has__PostI__276EDEB3">
+          <End Role="Posts" Type="Self.Post" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Posts_hashtags" Type="Self.Posts_hashtags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts_hashtags">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bans" EntityType="Self.Ban" />
+          <EntitySet Name="Hashtags" EntityType="Self.Hashtag" />
+          <EntitySet Name="Moderators" EntityType="Self.Moderator" />
+          <EntitySet Name="PostCategories" EntityType="Self.PostCategory" />
+          <EntitySet Name="Posts" EntityType="Self.Post" />
+          <EntitySet Name="Posts_hashtags" EntityType="Self.Posts_hashtags" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Bans__ModeratorI__22AA2996" Association="Self.FK__Bans__ModeratorI__22AA2996">
+            <End Role="Moderators" EntitySet="Moderators" />
+            <End Role="Bans" EntitySet="Bans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bans__UserId__21B6055D" Association="Self.FK__Bans__UserId__21B6055D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Bans" EntitySet="Bans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts_has__Hasht__286302EC" Association="Self.FK__Posts_has__Hasht__286302EC">
+            <End Role="Hashtags" EntitySet="Hashtags" />
+            <End Role="Posts_hashtags" EntitySet="Posts_hashtags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moderator__Targe__24927208" Association="Self.FK__Moderator__Targe__24927208">
+            <End Role="PostCategories" EntitySet="PostCategories" />
+            <End Role="Moderators" EntitySet="Moderators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moderators__Id__239E4DCF" Association="Self.FK__Moderators__Id__239E4DCF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Moderators" EntitySet="Moderators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts__CategoryI__25869641" Association="Self.FK__Posts__CategoryI__25869641">
+            <End Role="PostCategories" EntitySet="PostCategories" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts__AutorId__267ABA7A" Association="Self.FK__Posts__AutorId__267ABA7A">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts_has__PostI__276EDEB3" Association="Self.FK__Posts_has__PostI__276EDEB3">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Posts_hashtags" EntitySet="Posts_hashtags" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BlogsContextStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Bans">
+            <EntityTypeMapping TypeName="BlogsContext.Ban">
+              <MappingFragment StoreEntitySet="Bans">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ModeratorId" ColumnName="ModeratorId" />
+                <ScalarProperty Name="DateBanned" ColumnName="DateBanned" />
+                <ScalarProperty Name="DaysBanned" ColumnName="DaysBanned" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hashtags">
+            <EntityTypeMapping TypeName="BlogsContext.Hashtag">
+              <MappingFragment StoreEntitySet="Hashtags">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Moderators">
+            <EntityTypeMapping TypeName="BlogsContext.Moderator">
+              <MappingFragment StoreEntitySet="Moderators">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TargetCategoryId" ColumnName="TargetCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostCategories">
+            <EntityTypeMapping TypeName="BlogsContext.PostCategory">
+              <MappingFragment StoreEntitySet="PostCategories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="BlogsContext.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Post1" ColumnName="Post" />
+                <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="DayPosted" ColumnName="DayPosted" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="AutorId" ColumnName="AutorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts_hashtags">
+            <EntityTypeMapping TypeName="BlogsContext.Posts_hashtags">
+              <MappingFragment StoreEntitySet="Posts_hashtags">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="HashtagId" ColumnName="HashtagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BlogsContext.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DateRegistered" ColumnName="DateRegistered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

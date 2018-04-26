@@ -9,8 +9,8 @@ CREATE PROCEDURE sp_tmp_insert_Lookup (@Name nvarchar(64))
 AS
 BEGIN
 
-	IF NOT EXISTS (SELECT 1 FROM hashtags WHERE Name = @Name)
-		INSERT INTO hashtags(Name) VALUES (@Name)
+	IF NOT EXISTS (SELECT 1 FROM [Hashtags] WHERE Name = @Name)
+		INSERT INTO [Hashtags](Name) VALUES (@Name)
 
 END
 GO

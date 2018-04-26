@@ -35,4 +35,53 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="posts" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="0fe2dd50-f03d-4082-afbb-3d88083a3fe1" ChangeDateTime="04/26/2018 00:40:39">
+    <Property Name="ElementName" Value="[dbo].[hashtags]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[Hashtags]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="afca1263-31dc-4e76-9534-52463de3bce0" ChangeDateTime="04/26/2018 00:40:44">
+    <Property Name="ElementName" Value="[dbo].[postCategories]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[PostCategories]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d4994df2-b8b5-478d-a85f-d63a3c5d288f" ChangeDateTime="04/26/2018 00:40:50">
+    <Property Name="ElementName" Value="[dbo].[posts]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="Posts" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3a994263-5ffd-4fd4-ba5d-de6365a589ba" ChangeDateTime="04/26/2018 00:40:57">
+    <Property Name="ElementName" Value="[dbo].[posts_hashtags]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[Posts_hashtags]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8f47da1d-208c-4f8d-876e-c2934af8d5d0" ChangeDateTime="04/26/2018 00:41:04">
+    <Property Name="ElementName" Value="[dbo].[moderators]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[Moderators]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="67259ee3-c98a-4ccf-a00d-c061f22bde84" ChangeDateTime="04/26/2018 00:41:13">
+    <Property Name="ElementName" Value="[dbo].[users]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[Users]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="221dcd14-ce63-41ca-9a0e-ef5fb88d4ca5" ChangeDateTime="04/26/2018 00:41:22">
+    <Property Name="ElementName" Value="[dbo].[bans]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="Bans" />
+  </Operation>
 </Operations>

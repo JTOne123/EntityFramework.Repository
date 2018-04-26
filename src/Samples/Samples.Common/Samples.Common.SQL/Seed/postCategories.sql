@@ -9,8 +9,8 @@ CREATE PROCEDURE sp_tmp_insert_Lookup (@Name nvarchar(64))
 AS
 BEGIN
 
-	IF NOT EXISTS (SELECT 1 FROM postCategories WHERE Name = @Name)
-		INSERT INTO postCategories(Name) VALUES (@Name)
+	IF NOT EXISTS (SELECT 1 FROM [PostCategories] WHERE Name = @Name)
+		INSERT INTO [PostCategories](Name) VALUES (@Name)
 
 END
 GO

@@ -30,10 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -44,14 +49,69 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Ban.cs">
+      <DependentUpon>BlogsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BlogsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BlogsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BlogsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BlogsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BlogsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BlogsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Hashtag.cs">
+      <DependentUpon>BlogsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Moderator.cs">
+      <DependentUpon>BlogsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Post.cs">
+      <DependentUpon>BlogsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PostCategory.cs">
+      <DependentUpon>BlogsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Posts_hashtags.cs">
+      <DependentUpon>BlogsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="User.cs">
+      <DependentUpon>BlogsModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="BlogsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BlogsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="BlogsModel.edmx.diagram">
+      <DependentUpon>BlogsModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BlogsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BlogsModel.edmx</DependentUpon>
+      <LastGenOutput>BlogsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="BlogsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BlogsModel.edmx</DependentUpon>
+      <LastGenOutput>BlogsModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

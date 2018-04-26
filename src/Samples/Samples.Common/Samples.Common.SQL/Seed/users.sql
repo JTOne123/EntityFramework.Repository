@@ -13,14 +13,14 @@ BEGIN
 	
 	DECLARE @userID INT
 	SELECT @userID = id 
-	FROM users
+	FROM [Users]
 	WHERE Username = @Username
 
 	IF @userID IS NULL
-		INSERT INTO users(Username, Password)	
+		INSERT INTO [Users](Username, Password)	
 			VALUES	(@Username, @Password)
 	ELSE
-		UPDATE users 
+		UPDATE [Users] 
 		SET Password = @Password -- let it be.
 		WHERE id = @userID
 
