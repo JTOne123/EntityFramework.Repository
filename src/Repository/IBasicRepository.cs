@@ -1,3 +1,5 @@
+using DevOvercome.EntityFramework.Repository.Fetching;
+
 namespace DevOvercome.EntityFramework.Repository
 {
 	public interface IBasicRepository
@@ -23,6 +25,10 @@ namespace DevOvercome.EntityFramework.Repository
 		/// <param name="model"></param>
 		/// <returns></returns>
 		ISaveBuilder AddOrUpdateItem<TModel>(TModel model) where TModel : class;
+
+		ISaveBuilder AddItem<TModel>(TModel model) where TModel : class;
+
+		ISaveBuilder UpdateItem<TModel>(TModel model) where TModel : class;
 		ISaveBuilder DeleteItem<TModel>(TModel model) where TModel : class;
 		ISaveBuilder BuildSave();
 	}

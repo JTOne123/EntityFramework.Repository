@@ -79,3 +79,4 @@ _[Ss]cripts
 
 # SQL Server Data Tools
 /**/*.dbmdl
+/**/*.jfm

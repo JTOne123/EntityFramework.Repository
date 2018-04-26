@@ -4,8 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace DevOvercome.EntityFramework.Repository.Internals.Parameters
+namespace DevOvercome.EntityFramework.Repository.Internals.Parameters.Fetching
 {
+
 	internal class FetchParameters<TModel> : QueryParameters<TModel>
 		where TModel : class
 	{
@@ -18,14 +19,12 @@ namespace DevOvercome.EntityFramework.Repository.Internals.Parameters
 
 		internal List<Expression<Func<TModel, bool>>> FilteringRules { get; private set; }
 		
-		internal PagingRule PagingRule { get; private set; }
 		internal List<SortingRule> SortingRules { get; private set; }
 
 		public FetchParameters()
 		{
 			NoTracking = true;
-			FilteringRules = new List<Expression<Func<TModel, bool>>>();
-			PagingRule = new PagingRule() { PageIndex = 1, PageSize = int.MaxValue };
+			FilteringRules = new List<Expression<Func<TModel, bool>>>();			
 			SortingRules = new List<SortingRule>();
 		}
 
@@ -33,7 +32,7 @@ namespace DevOvercome.EntityFramework.Repository.Internals.Parameters
 			:this()
 		{
 			FilteringRules = model.FilteringRules;
-			PagingRule = model.PagingRule;
+			
 			SortingRules = model.SortingRules;
 		}
 
@@ -92,11 +91,7 @@ namespace DevOvercome.EntityFramework.Repository.Internals.Parameters
 			return AddSorting(name, sortDirection);
 		}
 
-		public FetchParameters<TModel> SetPaging(int pageIndex, int pageSize)
-		{
-			PagingRule = new PagingRule() { PageIndex = pageIndex, PageSize = pageSize };
-			return this;
-		}
+		
 
 		// We wont support this hell. Just use fluent api for base classes later than derived ones
 		//// HACK: bad idea. every new XXXParameters supposed to do this over and over again in order to support fluent api

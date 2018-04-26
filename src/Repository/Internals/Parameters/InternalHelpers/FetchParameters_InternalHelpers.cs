@@ -1,4 +1,5 @@
 using DevOvercome.EntityFramework.Repository.DataManipulationRules;
+using DevOvercome.EntityFramework.Repository.Internals.Parameters.Fetching;
 using System;
 using System.Linq;
 using System.Linq.Expressions;

@@ -1,5 +1,7 @@
 using DevOvercome.EntityFramework.Repository.DataManipulationRules;
+using DevOvercome.EntityFramework.Repository.Fetching;
 using DevOvercome.EntityFramework.Repository.Internals.Parameters;
+using DevOvercome.EntityFramework.Repository.Internals.Parameters.Fetching;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -7,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace DevOvercome.EntityFramework.Repository.Internals.Builders
 {
-	internal sealed class FetchBuilder<TModel> 
+	internal class FetchBuilder<TModel> 
 		: IFetchBuilder<TModel> where TModel : class
 	{
 		private readonly FetchParameters<TModel> fetchParameters = new FetchParameters<TModel>();
 
-		private readonly BasicRepository repository;
+		protected readonly BasicRepository repository;
 
 		// this injection is fine since the design hides this behind internal
 		internal FetchBuilder(BasicRepository repository)
@@ -44,15 +46,7 @@ namespace DevOvercome.EntityFramework.Repository.Internals.Builders
 			return this;
 		}
 
-		public PagingResult<TModel> FetchPaging()
-		{
-			return repository.FetchPaging(fetchParameters);
-		}
-
-		public Task<PagingResult<TModel>> FetchPagingAsync()
-		{
-			return repository.FetchPagingAsync(fetchParameters);
-		}
+		
 
 		public TModel FetchOne(bool throwIfNotFound = false)
 		{
@@ -84,18 +78,7 @@ namespace DevOvercome.EntityFramework.Repository.Internals.Builders
 			fetchParameters.SetNoTracking(noTracking);
 			return this;
 		}
-
-		public IFetchBuilder<TModel> SetPaging(int pageIndex, int pageSize)
-		{
-			fetchParameters.SetPaging(pageIndex, pageSize);
-			return this;
-		}
-
-		public IFetchBuilder<TModel> SetPaging(PagingRule pagingRule)
-		{
-			fetchParameters.SetPaging(pagingRule.PageIndex, pagingRule.PageSize);
-			return this;
-		}
+	
 
 		public Task<List<TModel>> FetchAsync()
 		{
@@ -105,6 +88,11 @@ namespace DevOvercome.EntityFramework.Repository.Internals.Builders
 		public List<TModel> Fetch()
 		{
 			return repository.Fetch(fetchParameters);
+		}
+
+		public IPagingFetchBuilder<TModel> AsPagingBuilder()
+		{
+			return new PagingFetchBuilder<TModel>(repository, fetchParameters);
 		}
 	}
 }

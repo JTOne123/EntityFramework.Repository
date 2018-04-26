@@ -1,4 +1,4 @@
-namespace DevOvercome.EntityFramework.Repository.Internals.Parameters
+namespace DevOvercome.EntityFramework.Repository.Internals.Parameters.Fetching
 {
 	// TODO: actually, paging not required here.
 	internal class FetchOneParameters<TModel> : FetchParameters<TModel> 

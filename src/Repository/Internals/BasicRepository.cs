@@ -1,6 +1,8 @@
 using DevOvercome.EntityFramework.Repository.DataManipulationRules;
+using DevOvercome.EntityFramework.Repository.Fetching;
 using DevOvercome.EntityFramework.Repository.Internals.Builders;
 using DevOvercome.EntityFramework.Repository.Internals.Parameters;
+using DevOvercome.EntityFramework.Repository.Internals.Parameters.Fetching;
 using DevOvercome.EntityFramework.Repository.Internals.Parameters.InternalHelpers;
 using DevOvercome.EntityFramework.Repository.Internals.Utils;
 using System.Collections.Generic;
@@ -39,6 +41,20 @@ namespace DevOvercome.EntityFramework.Repository.Internals
 			return BuildSave();
 		}
 
+		public ISaveBuilder AddItem<TModel>(TModel model) where TModel : class
+		{
+			var entry = context.Entry(model);
+			entry.State = EntityState.Added;
+			return BuildSave();
+		}
+
+		public ISaveBuilder UpdateItem<TModel>(TModel model) where TModel : class
+		{
+			var entry = context.Entry(model);
+			entry.State = EntityState.Modified;
+			return BuildSave();
+		}
+
 		public ISaveBuilder BuildSave()
 		{
 			return new SaveBuilder(this);
@@ -72,14 +88,14 @@ namespace DevOvercome.EntityFramework.Repository.Internals
 			return FormFetchQuery(fetchParameters).ToListAsync();
 		}
 
-		internal Task<PagingResult<TModel>> FetchPagingAsync<TModel>(FetchParameters<TModel> fetchParameters) where TModel : class
+		internal Task<PagingResult<TModel>> FetchPagingAsync<TModel>(FetchPagingParameters<TModel> fetchParameters) where TModel : class
 		{
 			var fq = FormFetchQuery(fetchParameters);
 			// 4 Paging
 			return PagingAsync(fq, fetchParameters.PagingRule);
 		}
 
-		internal PagingResult<TModel> FetchPaging<TModel>(FetchParameters<TModel> fetchParameters) where TModel : class
+		internal PagingResult<TModel> FetchPaging<TModel>(FetchPagingParameters<TModel> fetchParameters) where TModel : class
 		{
 			var fq = FormFetchQuery(fetchParameters);
 			// 4 Paging
@@ -256,6 +272,8 @@ namespace DevOvercome.EntityFramework.Repository.Internals
 			}
 			return res;
 		}
+
+	
 	}
 
 }
