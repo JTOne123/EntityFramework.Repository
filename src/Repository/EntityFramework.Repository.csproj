@@ -3,6 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>DevOvercome.EntityFramework.Repository</RootNamespace>
+    <PackageId>DevOvercome.EntityFramework.Repository</PackageId>
+    <Authors>al.kozachenko</Authors>
+    <Company>DevOvercome</Company>
+    <Description>Simple but DI-aware and extensible repository for EF DbContext</Description>
+    <PackageLicenseUrl>https://github.com/devovercome/EntityFramework.Repository/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/devovercome/EntityFramework.Repository</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/devovercome/EntityFramework.Repository</RepositoryUrl>
+    <PackageTags>EntityFramework DbContext RepositoryPattern Repository DependencyInjection DI Wrapper EF Data</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

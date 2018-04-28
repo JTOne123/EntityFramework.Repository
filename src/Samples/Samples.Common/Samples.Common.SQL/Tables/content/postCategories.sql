@@ -1,5 +1,0 @@
-﻿CREATE TABLE [dbo].[PostCategories]
-(
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
-	Name NVARCHAR(64) NOT NULL UNIQUE,
-)
