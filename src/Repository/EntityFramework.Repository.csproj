@@ -12,8 +12,20 @@
     <RepositoryUrl>https://github.com/devovercome/EntityFramework.Repository</RepositoryUrl>
     <PackageTags>EntityFramework DbContext RepositoryPattern Repository DependencyInjection DI Wrapper EF Data</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
+    <AssemblyName>DevOK.EntityFramework.Repository</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="readme.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="readme.txt">
+      <Pack>true</Pack>
+       <PackagePath></PackagePath>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.2.0" />

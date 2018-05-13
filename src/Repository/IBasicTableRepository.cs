@@ -10,6 +10,8 @@ namespace DevOvercome.EntityFramework.Repository
 		IQueryBuilder<TModel> BuildQuery();
 		IFetchBuilder<TModel> BuildFetch();
 		ISaveBuilder AddOrUpdateItem(TModel model);
+		ISaveBuilder AddItem(TModel model);
+		ISaveBuilder UpdateItem(TModel model);
 		ISaveBuilder DeleteItem(TModel model);
 		ISaveBuilder BuildSave();
 	}

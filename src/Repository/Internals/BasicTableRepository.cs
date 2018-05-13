@@ -50,6 +50,16 @@ namespace DevOvercome.EntityFramework.Repository.Internals
 		{
 			return repository.BuildSave();
 		}
+
+		public ISaveBuilder AddItem(TModel model)
+		{
+			return repository.AddItem(model);
+		}
+
+		public ISaveBuilder UpdateItem(TModel model)
+		{
+			return repository.UpdateItem(model);
+		}
 	}
 
 }
