@@ -30,7 +30,7 @@ Simple example for ASP.NET with Ninject
 				// cant reproduce locally
 				throw rex.LoaderExceptions[0];
 			}
-		});
+		}); 
 
 	See my list of ninject-packages where it works:
 	  <package id="Ninject" version="3.3.4" targetFramework="net471" />
